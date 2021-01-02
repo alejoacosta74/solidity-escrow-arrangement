@@ -1,0 +1,17 @@
+{
+  "name": "bosson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejo Acosta",
+  "license": "ISC",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^3.3.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^8.2.1"
+  }
+}
