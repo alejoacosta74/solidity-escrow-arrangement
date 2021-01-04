@@ -27,6 +27,8 @@ Functions | Description
 `Complete()` | *Transfer BossonCoins from BossonEscrow account to Seller account. Updates item ownership to Buyer*
 `Complain()` | *Reverts internal escrow balances for Buyer and Seller account according to item price*
 
+- example of trasaction: credt(buyer1, 20)
+![credit](https://i.imgur.com/7no0AiO.png)
 (tbc)
 
 
