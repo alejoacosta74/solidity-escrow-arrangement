@@ -40,6 +40,7 @@ Functions | Description
 (tbc)
 
 ### How it all fits together
+[Imgur](https://i.imgur.com/Jim5FJv.png)
 (tbc)
 ## Installation
 
