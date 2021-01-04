@@ -9,7 +9,7 @@ function tokens(n){
     return web3.utils.toWei(n, 'ether')
 }
 
-contract ('bosson escrow contract', (accounts) => {
+contract ('bosson escrow Unit Test', (accounts) => {
     let _bossoncoin , _bossonescrow 
     let  coinDeployer = accounts[0]
     let escrowAgent = accounts[1]
@@ -65,14 +65,14 @@ contract ('bosson escrow contract', (accounts) => {
         it ('transfers BossonCoins from buyer1 to Escrow account', async ()=> {            
             await _bossoncoin.approve(_bossonescrow.address, 20, {from: buyer1})
             await _bossonescrow.credit(buyer1, 20, {from: escrowAgent})
-            balance = await _bossonescrow.checkescrowBalance(buyer1)
+            balance = await _bossonescrow.checkEscrowBalance(buyer1)
             assert.equal(balance, 20, "balance should be 20")
         })
         it ('Buyer places order to buy coffee', async ()=> {            
             await _bossonescrow.order(buyer1, "coffee", {from: escrowAgent})
-            balance = await _bossonescrow.checkescrowBalance(buyer1)
+            balance = await _bossonescrow.checkEscrowBalance(buyer1)
             assert.equal(balance, 17, "balance should be 17")
-            balance = await _bossonescrow.checkescrowBalance(seller1)
+            balance = await _bossonescrow.checkEscrowBalance(seller1)
             assert.equal(balance, 3, "balance should be 3")
         })
         it ('Buyer confirms coffee payment', async ()=> {            
@@ -83,5 +83,4 @@ contract ('bosson escrow contract', (accounts) => {
             assert.equal(item.buyer, buyer1)
         })
     })
-
 })

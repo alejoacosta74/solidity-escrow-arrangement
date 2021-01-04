@@ -2,8 +2,6 @@
 
 This repository contains the project source code and dependencies required to deploy a ESCROW ARRANGEMENT in Ethereum development network.
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ## Description
 
 ### Project description
@@ -29,7 +27,7 @@ Functions | Description
 `Complete()` | *Transfer BossonCoins from BossonEscrow account to Seller account. Updates item ownership to Buyer*
 `Complain()` | *Reverts internal escrow balances for Buyer and Seller account according to item price*
 
-
+(tbc)
 
 
 ### Dependencies
@@ -39,8 +37,10 @@ Functions | Description
   - Testing: Truffle / Mocha / Chai
 
 ### Description of files
-### How it all fits together
+(tbc)
 
+### How it all fits together
+(tbc)
 ## Installation
 
 Clone repository and install the dependencies and devDependencies:
@@ -66,6 +66,31 @@ $ truffle compile
 $ truffle migrate
 ```
 # Test
+The problem **example input** provided in the technical assignment is coded within the truffle test file *BossonEscrow.assigmentTest.js*:
+
+```javascript
+       //execute example input TXs
+        await _bossoncoin.approve(_bossonescrow.address, tokens('20'), {from: buyer1})
+        await _bossonescrow.credit(buyer1, tokens('20'), {from: escrowAgent})
+        await _bossoncoin.approve(_bossonescrow.address, tokens('40'), {from: buyer2})
+        await _bossonescrow.credit(buyer2, tokens('40'), {from: escrowAgent})
+        await _bossonescrow.offer(seller1, "Coffee", tokens('3'), 10)
+        await _bossonescrow.offer(seller2, "T-shirt", tokens('5'), 10)
+        await _bossonescrow.offer(seller1, "Tea", tokens('2.5'), 10)
+        await _bossonescrow.offer(seller1, "Cake", tokens('3.5'), 10)
+        await _bossonescrow.offer(seller2, "Shorts", tokens('8'), 10)
+        await _bossonescrow.offer(seller2, "Hoody", tokens('12'), 10)
+        await _bossonescrow.order(buyer1, "T-shirt", {from: escrowAgent})
+        await _bossoncoin.approve(_bossonescrow.address, tokens('10'), {from: buyer1})
+        await _bossonescrow.credit(buyer1, tokens('10'), {from: escrowAgent})
+        await _bossonescrow.order(buyer2, "Hoody", {from: escrowAgent})
+        await _bossonescrow.complete(buyer1, "T-shirt", {from: escrowAgent})
+        await _bossonescrow.order(buyer1, "Coffee", {from: escrowAgent})
+        await _bossonescrow.order(buyer1, "Cake", {from: escrowAgent})
+        await _bossonescrow.complain(buyer2, "Hoody", {from: escrowAgent})
+        await _bossonescrow.order(buyer2, "Tea", {from: escrowAgent})
+        await _bossonescrow.complete(buyer1, "Coffee", {from: escrowAgent})
+```
 Execute truffle test from command prompt:
 
 ```sh
@@ -75,34 +100,18 @@ $ truffle test
 Expected output:
 
 ```bash
-$:~/ethereum/bosson$ truffle test
-Using network 'development'.
+  Contract: bosson escrow arrangement
+    Bosson escrow assigment
 
 
-Compiling your contracts...
-===========================
-✔ Fetching solc version list from solc-bin. Attempt #1
-> Everything is up to date, there is nothing to compile.
+         (test console output) Balance buyer1: 18.5
+      ✓ Buyer1 balance is 18.5 (106ms)
+         (test console output) Balance Seller2: 5
+      ✓ Seller2 balance is 5 (101ms)
+         (test console output) Escrow internal balance: 62
+         (test console output) BossonCoin Escrow account balance:62
+      ✓ Escrow balance is 62 (193ms)
 
 
-
-  Contract: bosson escrow contract
-    BossonCoin deployment
-      ✓ has a name (223ms)
-      ✓ transfer 100 coins to buyer1 (296ms)
-      ✓ updated balance of BossonCoin contract owner after funding buyer1 and buyer2 (81ms)
-    BossoneScrow deployment
-      ✓ has a name (90ms)
-      ✓ Seller1 offers coffe for 3 coins (314ms)
-      ✓ Escrow agent should not be able to transfer without buyer allowance (186ms)
-      ✓ transfers BossonCoins from buyer1 to Escrow account (429ms)
-      ✓ Buyer places order to buy coffee (401ms)
-Item coffee: 3,coffee,0xd03ea8624C8C5987235048901fB614fDcA89b117,0x22d491Bde2303f2f43325b2108D26f1eAbA1e32b,,10,true
-      ✓ Buyer confirms coffee payment (386ms)
-
-
-  9 passing (3s)
-
+  3 passing (6s)
 ```
-## License
-[MIT](https://choosealicense.com/licenses/mit/
