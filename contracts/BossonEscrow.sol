@@ -95,6 +95,7 @@ contract BossonEscrow is Ownable {
         stock[_itemName].state = ItemState.COMPLETE;
         bossonCoin.transfer(seller, stock[_itemName].price);
         escrowBalances[address(this)] = escrowBalances[address(this)] - stock[_itemName].price ;
+        escrowBalances[seller] = escrowBalances[seller] - stock[_itemName].price ;
      }
      
      //@dev: buyer did not receive item and 

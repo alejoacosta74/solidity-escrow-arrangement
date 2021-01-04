@@ -27,8 +27,7 @@ Functions | Description
 `Complete()` | *Transfer BossonCoins from BossonEscrow account to Seller account. Updates item ownership to Buyer*
 `Complain()` | *Reverts internal escrow balances for Buyer and Seller account according to item price*
 
-- example of trasaction: credt(buyer1, 20)
-![credit](https://i.imgur.com/7no0AiO.png)
+
 (tbc)
 
 
@@ -42,7 +41,25 @@ Functions | Description
 (tbc)
 
 ### How it all fits together
-![Imgur](https://i.imgur.com/Jim5FJv.png)
+
+- initial mint:
+  
+![mintin](https://i.imgur.com/tkw5hfM.png)
+
+
+- example flow for trasaction: **_credit(buyer1, 20)_**
+
+![credit(buyer1,20)](https://i.imgur.com/2ErhNIy.png)
+
+
+- example flow for trasaction: **_order(buyer1, "T-shirt")_**
+
+![order(buyer1, "T-shirt")](https://i.imgur.com/Yrc15kJ.png)
+
+- example flow for trasaction: **_confirm(buyer1, "T-shirt")_**
+
+![confirm(buyer1, "T-shirt")](https://i.imgur.com/F0D5g96.png)
+
 (tbc)
 ## Installation
 
