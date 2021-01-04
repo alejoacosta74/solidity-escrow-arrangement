@@ -44,21 +44,21 @@ Functions | Description
 
 - initial mint:
   
-![mintin](https://i.imgur.com/tkw5hfM.png)
+![mintin](https://i.imgur.com/vixLdwG.png)
 
 
 - example flow for trasaction: **_credit(buyer1, 20)_**
 
-![credit(buyer1,20)](https://i.imgur.com/2ErhNIy.png)
+![credit(buyer1,20)](https://i.imgur.com/3t5LfeB.png)
 
 
 - example flow for trasaction: **_order(buyer1, "T-shirt")_**
 
-![order(buyer1, "T-shirt")](https://i.imgur.com/Yrc15kJ.png)
+![order(buyer1, "T-shirt")](https://i.imgur.com/Uvus9iD.png)
 
 - example flow for trasaction: **_confirm(buyer1, "T-shirt")_**
 
-![confirm(buyer1, "T-shirt")](https://i.imgur.com/F0D5g96.png)
+![confirm(buyer1, "T-shirt")](https://i.imgur.com/B8jFIli.png)
 
 (tbc)
 ## Installation
