@@ -32,8 +32,9 @@ contract BossonEscrow is Ownable {
     }
      
      //@dev:  buyer funds are transfered to escrow account (in BossonCoin contract)
-     // Buyer balanace is incremented in escrow internal balance
+     // Buyer balance is incremented in escrow internal balance
      // Escrow balance is incremented in escrow internal balance
+     //@params: takes in buyer address and amount to be credited
      function credit (address _buyer, uint256 _amount) public {
         require(bossonCoin.allowance(_buyer, address(this)) >= _amount,
             "Bossonescrow not allowed to transferFrom this buyer"
@@ -61,6 +62,7 @@ contract BossonEscrow is Ownable {
      //@dev: buyer places order to buy item. 
      //Item is marked as state AWAITING_DELIVERY 
      //Escrow internal balance for buyer and seller is updated
+     //@params: takes in buyer address and name of the item to buy
      function order (address _buyer, string memory _itemName) public onlyOwner {         
          require (stock[_itemName].exists, "Items does not exists");
          require (stock[_itemName].qty >= 0, "Item is out of stock");
@@ -74,6 +76,7 @@ contract BossonEscrow is Ownable {
      //@dev: seller puts item for sale. 
      //Item is marked as state OFFERED 
      //Item is added to escrow stock mapping
+     //@params: takes in seller address, name of the item, price and quantities to put for sale
      function offer (address _seller , string memory _itemName , uint256 _itemPrice, uint8 _qty) public {
          Item memory item;
          item.name = _itemName;
@@ -89,6 +92,7 @@ contract BossonEscrow is Ownable {
      // payment is transfered from escrow BossonCoin account to seller BossonCoin account. 
      // Item is marked as state COMPLETE     
      // Escrow balance is decremented in escrow internal balance
+     //@params: takes in buyer address and name of the item to buy
      function complete (address _buyer, string memory _itemName) public onlyOwner {        
         address seller = stock[_itemName].seller;
         stock[_itemName].buyer = _buyer;
@@ -101,6 +105,7 @@ contract BossonEscrow is Ownable {
      //@dev: buyer did not receive item and 
      //Escrow internal balance for buyer and seller is updated
      // Item is reverted back to state OFFERED
+     //@params: takes in buyer address and name of the item to buy
      function complain (address _buyer ,string memory _itemName) public onlyOwner {         
          address seller = stock[_itemName].seller;
          stock[_itemName].buyer = address(0);

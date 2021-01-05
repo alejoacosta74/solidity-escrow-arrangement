@@ -2,70 +2,63 @@
 
 This repository contains the project source code and dependencies required to deploy a ESCROW ARRANGEMENT in Ethereum development network.
 
-## Description
+## 1. Description
 
-### Project description
 This project implements a simple escrow arrangement in Ethereum network.
 
 The escrow is deployed with the following 2 Ethereum smart contracts written in solidity:
 
-#### BossonCoin.sol
+### - *BossonCoin.sol*
+
 This contract defines the token ('bossonCoin') that is used used witin the escrow arrangement to fund account and execute transactions
 
 BossonCoin.sol inherits the standard ERC20 from [OpenZeppelin/ERC20](https://docs.openzeppelin.com/contracts/3.x/erc20), and is initialy minted with 100 coins.
 
-#### BossonEscrow.sol
+### - *BossonEscrow.sol*
+
 This contract defines all the 'business logic' of the escrow arrangement.
 
-BossonEscrow.sol inherits the Ownable interface from [OpenZeppelin/access/Ownable](https://docs.openzeppelin.com/contracts/3.x/api/access#Ownable) to ensure that only the escrow agent is allowed to perform changes to the contract state varables, such as balances. 
+BossonEscrow.sol inherits the Ownable interface from [OpenZeppelin/access/Ownable](https://docs.openzeppelin.com/contracts/3.x/api/access#Ownable) to ensure that only the escrow agent is allowed to perform changes to the contract state variables, such as balances.
+
+The following functions are implemented on BossonCoin.sol:
 
 Functions | Description
 --- | ---
 `Credit()` | *Transfer BossonCoins from Buyer account to BossonEscrow account*
-`Order()` | *Checks Buyer has enough funds on escrow and item availability. Updates internal escrow balances for Buyer and Seller according to item price*
-`Offer()` | *Creates a new item for sale and adds it to the BossonScrow mapping of stock*
-`Complete()` | *Transfer BossonCoins from BossonEscrow account to Seller account. Updates item ownership to Buyer*
-`Complain()` | *Reverts internal escrow balances for Buyer and Seller account according to item price*
+`Order()` | *Checks Buyer has enough funds on escrow and item availability. Updates internal escrow balances for Buyer and Seller according to item price. Marks item state as AWAITING_DELIVERY*
+`Offer()` | *Creates a new item for sale and adds it to the BossonScrow stock of items for sale. Marks item state as OFFERED*
+`Complete()` | *Transfer BossonCoins from BossonEscrow account to Seller account. Updates item ownership to Buyer. Marks item state as COMPLETE*
+`Complain()` | *Reverts internal escrow balances for Buyer and Seller account according to item price. Marks item state as OFFERED*
 
+## 2. Framework and dependencies
 
-(tbc)
+- Source code language: Solidity  
+- Development environment: Node.js / NPM / Truffle / Ganache
+- Testing: Truffle / Mocha / Chai
 
+## 3. How it all fits together
 
-### Dependencies
-
-  - Source code language: Solidity  - 
-  - Development environment: Node.js / NPM / Truffle / Ganache
-  - Testing: Truffle / Mocha / Chai
-
-### Description of files
-(tbc)
-
-### How it all fits together
-
-- initial mint:
+### - Initial mint
   
 ![mintin](https://i.imgur.com/vixLdwG.png)
 
-
-- example flow for trasaction: **_credit(buyer1, 20)_**
+### - Example flow for trasaction: **_credit(buyer1, 20)_**
 
 ![credit(buyer1,20)](https://i.imgur.com/3t5LfeB.png)
 
-
-- example flow for trasaction: **_order(buyer1, "T-shirt")_**
+### - Example flow for trasaction: **_order(buyer1, "T-shirt")_**
 
 ![order(buyer1, "T-shirt")](https://i.imgur.com/Uvus9iD.png)
 
-- example flow for trasaction: **_confirm(buyer1, "T-shirt")_**
+### - Example flow for trasaction: **_confirm(buyer1, "T-shirt")_**
 
 ![confirm(buyer1, "T-shirt")](https://i.imgur.com/B8jFIli.png)
 
-(tbc)
-## Installation
+## 4. Install
 
-Clone repository and install the dependencies and devDependencies:
+Clone repository and install dependencies and devDependencies:
 
-```sh
+```bash
 $ npm install -g truffle
 $ npm install -g ganache-cli
 $ cd bossonEscrow
@@ -73,19 +66,23 @@ $ npm init
 ```
 
 
-## Usage
+## 5. Usage
 
 Start ganache-cli development ethereum network:
+
 ```sh
 $ ganache-cli -d 10000000 --allowUnlimitedContractSize --gasLimit=0x1FFFFFFFF
 ```
-Compile and deploy solidity contracts to Ganache development network:
+
+On another terminal, compile and deploy solidity contracts to Ganache development network:
 
 ```sh
 $ truffle compile
 $ truffle migrate
 ```
-# Test
+
+## 6. Test
+
 The problem **example input** provided in the technical assignment is coded within the truffle test file *BossonEscrow.assigmentTest.js*:
 
 ```javascript
@@ -111,13 +108,18 @@ The problem **example input** provided in the technical assignment is coded with
         await _bossonescrow.order(buyer2, "Tea", {from: escrowAgent})
         await _bossonescrow.complete(buyer1, "Coffee", {from: escrowAgent})
 ```
-Execute truffle test from command prompt:
+
+- Expected flow of coins and balance state as per **example input**:
+
+![Excel](./docs/excel_capture.JPG) 
+
+- Execute truffle test from command prompt:
 
 ```sh
 $ truffle test
 ```
 
-Expected output:
+- Expected output:
 
 ```bash
   Contract: bosson escrow arrangement

@@ -59,7 +59,7 @@ contract ('bosson escrow arrangement', (accounts) => {
             console.log('\t (test console output) Balance buyer1: ' + web3.utils.fromWei(balanceBuyer1.toString()))
         })
         it ('Seller2 balance is 5', async () => {
-            balanceSeller2 = await _bossonescrow.checkEscrowBalance(seller2)
+            balanceSeller2 = await _bossoncoin.balanceOf(seller2)
             assert.equal(balanceSeller2.toString(), tokens('5'), "Seller2 balance should be 5")
             console.log('\t (test console output) Balance Seller2: ' + web3.utils.fromWei(balanceSeller2.toString()))
             
