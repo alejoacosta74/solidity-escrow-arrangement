@@ -2,6 +2,8 @@
 
 This repository contains the project source code and dependencies required to deploy a ESCROW ARRANGEMENT in Ethereum development network.
 
+[![built-with openzeppelin](https://img.shields.io/badge/built%20with-OpenZeppelin-3677FF)](https://docs.openzeppelin.com/)
+
 ## 1. Description
 
 This project implements a simple escrow arrangement in Ethereum network.
